@@ -1,0 +1,21 @@
+{
+  "name": "app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "source .env && node index.js",
+    "dev": "source .env && nodemon index.js",
+    "test": "AIDBOX_URL=http://$HOST_IP:9988 node test/scheduler_test.js"
+  },
+  "dependencies": {
+    "aidbox": "1.0.2",
+    "axios": "^0.19.0",
+    "moment": "^2.24.0",
+    "node-fetch": "^2.6.0",
+    "tape": "4.10.2"
+  },
+  "author": "Mikhail Poluboyarinov <mikle.sol@gmail.com>",
+  "license": "MIT"
+}
