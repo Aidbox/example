@@ -1,0 +1,29 @@
+{
+  "name": "aidbox-app",
+  "description": "aidbox app",
+  "logo": "https://raw.githubusercontent.com/Aidbox/example/master/mobile/static/logo.png",
+  "repository": "https://github.com/Aidbox/example",
+  "keywords": ["node", "slack"],
+  "env": {
+    "APP_INIT_URL": {
+      "description": "Aidbox server url http://fullstack.aidbox.app",
+      "required": true
+    },
+    "APP_CLIENT_ID": {
+      "description": "Aidbox app client id",
+      "required": true
+    },
+    "APP_CLIENT_SECRET": {
+      "description": "Aidbox app client secret",
+      "required": true
+    },
+    "APP_URL": {
+      "description": "Heroku app url",
+      "required": true
+    },
+    "APP_SECRET": {
+      "description": "Application secret",
+      "required": true
+    }
+  }
+}

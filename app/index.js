@@ -13,7 +13,7 @@ var ctx = {
 
     app_id: APP_ID,
     app_url: process.env.APP_URL,
-    app_port: process.env.APP_PORT,
+    app_port: process.env.APP_PORT || 3000,
     app_secret: process.env.APP_SECRET
   },
   manifest: {
