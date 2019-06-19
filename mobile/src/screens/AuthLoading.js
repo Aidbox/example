@@ -1,8 +1,10 @@
 import React from 'react';
+import { Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Container, Content, Text, Spinner } from 'native-base';
+import { View, Text, Spinner } from 'native-base';
 
 import { getUserInfo } from '../lib/helpers';
+import logo from '../../static/logo.png';
 
 export default class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -38,12 +40,16 @@ export default class AuthLoadingScreen extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Content>
-          <Spinner color="#D95640" style={{ marginTop: 100 }} />
-          <Text style={{ textAlign: 'center', fontSize: 18 }}>Loading...</Text>
-        </Content>
-      </Container>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Image
+          style={{
+            alignSelf: 'center',
+            justifyContent: 'center'
+          }}
+          source={logo}
+        />
+        <Spinner color="#D95640" style={{ marginTop: 10 }} />
+      </View>
     );
   }
 }
