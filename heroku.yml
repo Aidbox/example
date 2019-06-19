@@ -9,3 +9,5 @@ setup:
 build:
   docker:
     web: app/Dockerfile
+run:
+  web: cd /app && node index.js
