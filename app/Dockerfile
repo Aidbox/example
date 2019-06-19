@@ -1,14 +1,10 @@
 FROM node:12.4-alpine
 
-ENV APP_PORT=3000
+WORKDIR /app
 
-RUN mkdir /app
-
-COPY package.json /app
-RUN cd /app && npm install
-
+COPY *.json /app/
 COPY *.js /app/
 
-EXPOSE 3000
+RUN npm install
 
-ENTRYPOINT cd /app && node index.js
+CMD ["node", "index.js"]
