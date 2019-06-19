@@ -1,11 +1,3 @@
-setup:
-  config:
-    NODE_ENV: env
-    APP_INIT_URL: aidbox_url
-    APP_CLIENT_ID: aidbox_client
-    APP_CLIENT_SECRET: aidbox_secret
-    APP_URL: heroku_url
-    APP_SECRET: secret
 build:
   docker:
     web: app/Dockerfile

@@ -6,25 +6,25 @@
   "keywords": ["aidbox", "fhir"],
   "stack": "container",
   "env": {
-    "env": "production",
-    "aidbox_url": {
+    "NODE_ENV": "production",
+    "APP_INIT_URL": {
       "description": "Aidbox server url http://fullstack.aidbox.app",
       "required": true
     },
-    "aidbox_client": {
+    "APP_CLIENT_ID": {
       "description": "Aidbox app client id",
       "required": true
     },
-    "aidbox_secret": {
+    "APP_CLIENT_SECRET": {
       "description": "Aidbox app client secret",
       "required": true
     },
-    "heroku_url": {
+    "APP_URL": {
       "description": "Heroku app url https://you-app-name.herokuapp.com",
       "value": "https://.herokuapp.com",
       "required": true
     },
-    "secret": {
+    "APP_SECRET": {
       "description": "Application secret",
       "generator": "secret"
     }
