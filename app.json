@@ -4,6 +4,7 @@
   "logo": "https://raw.githubusercontent.com/Aidbox/example/master/mobile/static/logo.png",
   "repository": "https://github.com/Aidbox/example",
   "keywords": ["aidbox", "fhir"],
+  "stack": "container",
   "buildpacks": [{
     "url": "heroku/nodejs"
   }],
