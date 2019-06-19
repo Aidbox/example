@@ -5,28 +5,26 @@
   "repository": "https://github.com/Aidbox/example",
   "keywords": ["aidbox", "fhir"],
   "stack": "container",
-  "buildpacks": [{
-    "url": "heroku/nodejs"
-  }],
   "env": {
-    "NODE_ENV": "production",
-    "APP_INIT_URL": {
+    "env": "production",
+    "aidbox_url": {
       "description": "Aidbox server url http://fullstack.aidbox.app",
       "required": true
     },
-    "APP_CLIENT_ID": {
+    "aidbox_client": {
       "description": "Aidbox app client id",
       "required": true
     },
-    "APP_CLIENT_SECRET": {
+    "aidbox_secret": {
       "description": "Aidbox app client secret",
       "required": true
     },
-    "APP_URL": {
+    "heroku_url": {
       "description": "Heroku app url https://you-app-name.herokuapp.com",
+      "value": "https://.herokuapp.com",
       "required": true
     },
-    "APP_SECRET": {
+    "secret": {
       "description": "Application secret",
       "generator": "secret"
     }
