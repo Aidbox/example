@@ -39,11 +39,18 @@ var ctx = {
   }
 };
 
-aidbox
-  .start(ctx)
-  .then(() => {
-    console.log('connected to aidbox');
-  })
-  .catch(err => {
-    console.log(err.body);
-  });
+async function start() {
+  console.log('try to register aidbox app');
+  try {
+    await aidbox.start(ctx);
+    console.log('aidbox app was registred');
+  } catch (err) {
+    aidbox.stop();
+    console.log('Error:', err.body);
+    setTimeout(() => {
+      start();
+    }, 5000);
+  }
+}
+
+start();
