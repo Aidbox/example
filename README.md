@@ -26,6 +26,6 @@ id: fullstack-app
 resourceType: Client
 
 ```  
-- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/adibox/example/app)
+- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Aidbox/example/tree/master)
   - Insert all information
 - Try to create new from console User and check new patient
