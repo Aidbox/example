@@ -4,6 +4,9 @@
   "logo": "https://raw.githubusercontent.com/Aidbox/example/master/mobile/static/logo.png",
   "repository": "https://github.com/Aidbox/example",
   "keywords": ["aidbox", "fhir"],
+  "buildpacks": [{
+    "url": "heroku/nodejs"
+  }],
   "env": {
     "NODE_ENV": "production",
     "APP_INIT_URL": {
@@ -19,7 +22,7 @@
       "required": true
     },
     "APP_URL": {
-      "description": "Heroku app url",
+      "description": "Heroku app url https://you-app-name.herokuapp.com",
       "required": true
     },
     "APP_SECRET": {
