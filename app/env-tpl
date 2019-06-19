@@ -1,0 +1,6 @@
+export APP_INIT_URL=
+export APP_CLIENT_ID=
+export APP_CLIENT_SECRET=
+export APP_URL=
+export APP_SECRET=
+export PORT=3000
