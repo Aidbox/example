@@ -6,6 +6,7 @@ const { userSub } = require('./user');
 var APP_ID = 'scheduler';
 
 var ctx = {
+  debug: true,
   env: {
     init_url: process.env.APP_INIT_URL,
     init_client_id: process.env.APP_CLIENT_ID,
