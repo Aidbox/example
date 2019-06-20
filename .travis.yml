@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+- '8'
+- lts/*
+- node
+cache:
+  directories:
+  - app/node_modules
+  - mobile/node_modules
+services:
+  - docker
+env:
+  - DOCKER_COMPOSE_VERSION=1.4.2
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - npm install -g npm
+jobs:
+  include:
+  - stage: app tests
+    script: make aidbox-app-ci
+  - stage: deploy to heroku
+    script: skip
+    deploy:
+      provider: heroku
+      app: aidbox-app
+      api_key: "$HEROKU_AUTH_TOKEN"

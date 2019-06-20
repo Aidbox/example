@@ -2,14 +2,13 @@ const test = require('tape');
 const spawn = require('child_process').spawn;
 const axios = require('axios');
 
-const AUTH_HEADER = 'Basic aGF2ZW46aGF2ZW5zZWNyZXQ=';
+const AUTH_HEADER = 'Basic dGVzdC1hcHA6dGVzdC1zZWNyZXQ=';
 const AIDBOX_URL = process.env.AIDBOX_URL || 'http://localhost:9988';
 
 var server = null;
 
 const pingAidbox = (n = 0) => {
-  console.log('Connecting to aidbox...');
-
+  console.log(`Connecting to aidbox... ${AIDBOX_URL}`);
   return axios({
     method: 'GET',
     url: AIDBOX_URL + '/Patient',
@@ -46,10 +45,10 @@ test('start server', async t => {
     server = spawn('node', ['index.js'], {
       env: {
         APP_INIT_URL: AIDBOX_URL,
-        APP_CLIENT_ID: 'haven',
-        APP_CLIENT_SECRET: 'havensecret',
+        APP_CLIENT_ID: 'test-app',
+        APP_CLIENT_SECRET: 'test-secret',
         APP_URL: process.env.APP_URL || 'http://host.docker.internal:6666',
-        APP_PORT: 6666,
+        PORT: 6666,
         APP_SECRET: 'appsecret',
         PATH: process.env.PATH
       },

@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 const moment = require('moment');
 
 const visitTypes = require('./visit-types');
