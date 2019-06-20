@@ -1,4 +1,7 @@
-deps: npm i -g npm
+deps:
+	npm i -g npm
+test:
+	exit 0
 aidbox-app:
 	docker-compose -f dev/docker-compose-test.yml up -d
 	cd app && npm ci && HOST_IP=127.0.0.1 npm test
