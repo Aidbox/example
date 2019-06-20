@@ -17,16 +17,29 @@
   - In aidbox console open section *Auth Clients*
   - Click to *New* button
   - Insert this code and click to *Save* button
-```yaml
-secret: my-super-secret
-first_party: true
-grant_types:
-  - client_credentials
-  - basic
-id: fullstack-app
-resourceType: Client
+    ```yaml
+    secret: my-super-secret
+    first_party: true
+    grant_types:
+      - client_credentials
+      - basic
+    id: fullstack-app
+    resourceType: Client
+    
+    ``` 
+  - Open section *Access Control*
+  - Click *New* button
+  - Insert this code and click *Save* button
+    ```yaml
+    link:
+      - id: fullstack-app
+        resourceType: Client
+    engine: allow
+    id: fullstack-app
+    resourceType: AccessPolicy
+    
+    ```
 
-```  
 - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Aidbox/example/tree/master)
   - Insert all information
 - Try to create new from console User and check new patient
