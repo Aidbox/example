@@ -8,22 +8,22 @@ cache:
   - app/node_modules
   - mobile/node_modules
 services:
-  - docker
+- docker
 env:
-  - DOCKER_COMPOSE_VERSION=1.4.2
+- DOCKER_COMPOSE_VERSION=1.4.2
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - npm install -g npm
-jobs:
-  include:
-  - stage: app tests
-    script: make aidbox-app-ci
-  - stage: deploy to heroku
-    script: skip
-    deploy:
-      provider: heroku
-      app: aidbox-app
-      api_key: "$HEROKU_AUTH_TOKEN"
+- sudo rm /usr/local/bin/docker-compose
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
+  -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
+- npm install -g npm
+script:
+- make aidbox-app-ci
+deploy:
+  provider: heroku
+  api_key:
+    secure: jt5l5rzpBiLFmE8whpAAGfmuONfV54oBnx+2jHpTjbaWoRNBH9jGxEqnagTMCwnIZvhmDfynMpUL6t1ZKqSU+Hr+onnMIBEo7SZwU7WBICzVsHUTxaAEwggHVQKfOm42gq9ryaYBPVeF1FZhAZTWgY7TJ6fU3HqnfQcmK3NlcS3/NeoYaDsm+WXrvNybjOCClk7TzufIUQFFlyv76UbojhZlK/AuDVAleyAdmI2fCDWD/2AA25jcbG9ObVHYDiCJ7xsvIWQCbKkqVSo7LAQq87hSfU/9dBuKDzcLsxTJML8e3+fqtUaH+DkyvnEQNZ9nrH87TdMo0rkM5l93BE3BJntU+1CfB8Xpp9VCbXgAOPW38dPivVbdJs/LCtv59KH5azV5pa6Njs/yHDZEwGeCjOkIYfiAoNYkqPas6kOp/AFL7rfQ6GV5TrboEzJl3MFucg8/xeyDx1+yh20Zcy27w/efHNCO0t5NfVnQ9bnqGwIor3Y+P/f3O/wncPCwj9fD6attq4z6wlr9BCnt+FSIj0xiru4I1WRyPsiCwarWov48cMUaWirhlQwCf1ofI74RCE+roXBjeAh1HdWwUARP/F4v4Iv/+MDWD/skMkfNcTwoj44hNgDLOyE8276IDWAaZm3RpX8Ag4hF+bFqmMzN3vziL5oDa+SCw/9/zCNuQm4=
+  app: aidbox-app
+  on:
+    repo: Aidbox/example
