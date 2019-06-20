@@ -14,9 +14,9 @@
 ## Deployment
 - Create new box in https://aidbox.app
 - Prepare aidbox
-  - In aidbox console open section *Auth Clients*
-  - Click to *New* button
-  - Insert this code and click to *Save* button
+  - In aidbox console open section **Auth Clients**
+  - Click **New** button
+  - Insert this code and click to **Save** button
     ```yaml
     secret: my-super-secret
     first_party: true
@@ -27,9 +27,9 @@
     resourceType: Client
     
     ``` 
-  - Open section *Access Control*
-  - Click *New* button
-  - Insert this code and click *Save* button
+  - Open section **Access Control**
+  - Click **New** button
+  - Insert this code and click **Save** button
     ```yaml
     link:
       - id: fullstack-app
@@ -42,7 +42,7 @@
 
 - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Aidbox/example/tree/master)
   - Insert all information
-- Go to *Users* console on Aidbox and create a new user as shown below:
+- Go to **Users** console on Aidbox and create a new user as shown below:
 ```yaml
 name:
   formatted: Test User

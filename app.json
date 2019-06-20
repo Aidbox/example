@@ -27,6 +27,9 @@
     "APP_SECRET": {
       "description": "Application secret",
       "generator": "secret"
+    },
+    "APP_DEBUG": {
+      "value": "true"
     }
   }
 }
