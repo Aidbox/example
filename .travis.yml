@@ -10,7 +10,7 @@ cache:
 services:
 - docker
 env:
-- DOCKER_COMPOSE_VERSION=1.4.2
+- DOCKER_COMPOSE_VERSION=1.23.2
 before_install:
 - sudo rm /usr/local/bin/docker-compose
 - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
@@ -20,7 +20,11 @@ before_install:
 - npm install -g npm
 script:
 - docker-compose --version
-- make aidbox-app-ci
+- docker-compose -f dev/docker-compose-test.yml up -d
+- cd app
+- npm ci
+- HOST_IP=127.0.0.1 npm test
+- docker-compose -f dev/docker-compose-test.yml down
 deploy:
   provider: heroku
   api_key:
