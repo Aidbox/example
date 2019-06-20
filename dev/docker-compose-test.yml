@@ -2,7 +2,7 @@ version: '3.3'
 services:
   db:
     ports:
-      - "127.0.0.1:5432:6432"
+      - "5432:6432"
     environment:
       PGDATA: /data
       POSTGRES_PASSWORD: postgres
