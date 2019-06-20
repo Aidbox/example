@@ -12,6 +12,7 @@
 - Simple implementation FHIR [Argo-Scheduling](http://www.fhir.org/guides/argonaut/scheduling/)
 
 ## Deployment
+- Create new box in https://aidbox.app
 - Prepare aidbox
   - In aidbox console open section *Auth Clients*
   - Click to *New* button
