@@ -42,4 +42,21 @@
 
 - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Aidbox/example/tree/master)
   - Insert all information
-- Try to create new from console User and check new patient
+- Go to *Users* console on Aidbox and create a new user as shown below:
+```yaml
+name:
+  formatted: Test User
+  givenName: Test
+  familyName: User
+email: test@test.com
+password: test
+id: test
+resourceType: User
+
+```
+- Go to REST console and type in ```GET /Patient```, a new patient should be created
+- Go back to *Users* console, select the created user and check if it's updated with a patient reference like:
+```yaml
+data:
+  patient: Patient/<patient_id>
+```
