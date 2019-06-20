@@ -19,6 +19,7 @@ before_install:
 - sudo mv docker-compose /usr/local/bin
 - npm install -g npm
 script:
+- docker-compose --version
 - make aidbox-app-ci
 deploy:
   provider: heroku
