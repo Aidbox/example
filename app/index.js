@@ -3,7 +3,7 @@ const aidbox = require('aidbox');
 const { findAppointments, holdAppointment } = require('./appointment');
 const { userSub } = require('./user');
 
-var APP_ID = 'scheduler';
+var APP_ID = 'example-app';
 
 var ctx = {
   debug: process.env.APP_DEBUG || false,

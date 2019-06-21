@@ -3,7 +3,7 @@ const spawn = require('child_process').spawn;
 const axios = require('axios');
 
 const AUTH_HEADER = 'Basic dGVzdC1hcHA6dGVzdC1zZWNyZXQ=';
-const AIDBOX_URL = process.env.AIDBOX_URL || 'http://localhost:9988';
+const AIDBOX_URL = process.env.AIDBOX_URL || 'http://localhost:8080';
 
 var server = null;
 
@@ -47,7 +47,7 @@ test('start server', async t => {
         APP_INIT_URL: AIDBOX_URL,
         APP_CLIENT_ID: 'test-app',
         APP_CLIENT_SECRET: 'test-secret',
-        APP_URL: process.env.APP_URL || 'http://host.docker.internal:6666',
+        APP_URL: process.env.APP_URL,
         PORT: 6666,
         APP_SECRET: 'appsecret',
         PATH: process.env.PATH
@@ -122,9 +122,9 @@ test('start server', async t => {
 
 test('Check after sub create user', async t => {
   t.plan(3);
-  t.timeoutAfter(10000);
   try {
-    let resp = await axios({
+    await timeout(10000);
+    const respUC = await axios({
       method: 'POST',
       url: `${AIDBOX_URL}/User`,
       headers: {
@@ -141,9 +141,9 @@ test('Check after sub create user', async t => {
         password: 'test'
       }
     });
-    t.ok(resp.data.id === 'test');
-    await timeout(1000);
-    resp = await axios({
+    t.ok(respUC.data.id === 'test');
+    await timeout(2000);
+    const respCU = await axios({
       method: 'GET',
       url: `${AIDBOX_URL}/User/test`,
       headers: {
@@ -151,9 +151,9 @@ test('Check after sub create user', async t => {
         accept: 'application/json'
       }
     });
-    t.ok(resp.data.data.patient.length > 0);
-    const patientRef = resp.data.data.patient;
-    resp = await axios({
+    t.ok('data' in respCU.data && 'patient' in respCU.data.data && respCU.data.data.patient.length > 0);
+    const patientRef = respCU.data.data.patient;
+    const respPt = await axios({
       method: 'GET',
       url: `${AIDBOX_URL}/${patientRef}`,
       headers: {
@@ -161,7 +161,7 @@ test('Check after sub create user', async t => {
         accept: 'application/json'
       }
     });
-    t.ok(`Patient/${resp.data.id}` === patientRef);
+    t.ok(`Patient/${respPt.data.id}` === patientRef);
   } catch (err) {
     console.log(err);
     t.fail((err.response && JSON.stringify(err.response.data)) || err.message);
@@ -171,7 +171,6 @@ test('Check after sub create user', async t => {
 let token = null;
 test('Get token', async t => {
   t.plan(3);
-  t.timeoutAfter(10000);
   const resp = await axios({
     method: 'POST',
     url: `${AIDBOX_URL}/auth/token`,
@@ -190,9 +189,8 @@ test('Get token', async t => {
 
 test('Argonaut scheduling test', async t => {
   t.plan(8);
-  t.timeoutAfter(10000);
   try {
-    let resp = await axios({
+    const respPT = await axios({
       method: 'PUT',
       url: AIDBOX_URL + '/fhir/PractitionerRole/therapist',
       headers: {
@@ -210,8 +208,8 @@ test('Argonaut scheduling test', async t => {
         ]
       }
     });
-    t.ok(resp.data.resourceType === 'PractitionerRole');
-    resp = await axios({
+    t.ok(respPT.data.resourceType === 'PractitionerRole');
+    const respAF = await axios({
       method: 'GET',
       url: AIDBOX_URL + '/fhir/Appointment/$find',
       headers: {
@@ -223,13 +221,13 @@ test('Argonaut scheduling test', async t => {
         end: '2019-08-15T10:00:00'
       }
     });
-    t.ok(resp.data.resourceType === 'Bundle');
-    t.ok(resp.data.entry.length !== 0);
-
-    const statuses = [...new Set(resp.data.entry.map(e => e.resource.status))];
+    t.ok(respAF.data.resourceType === 'Bundle');
+    t.ok(Array.isArray(respAF.data.entry) && respAF.data.entry.length !== 0);
+    const respMap = Array.isArray(respAF.data.entry) ? respAF.data.entry.map(e => e.resource.status) : [];
+    const statuses = [...new Set(respMap)];
     t.deepEqual(statuses, ['proposed']);
-    const appt = resp.data.entry[0].resource;
-    resp = await axios({
+    const appt = Array.isArray(respAF.data.entry) ? respAF.data.entry[0].resource : null;
+    const respAH = await axios({
       method: 'POST',
       url: AIDBOX_URL + '/fhir/Appointment/$hold',
       headers: {
@@ -237,8 +235,8 @@ test('Argonaut scheduling test', async t => {
       },
       data: appt
     });
-    t.ok(resp.data.status === 'booked');
-    resp = await axios({
+    t.ok('status' in respAH && respAH.data.status === 'booked');
+    const respAF1 = await axios({
       method: 'GET',
       url: AIDBOX_URL + '/fhir/Appointment/$find',
       headers: {
@@ -250,10 +248,11 @@ test('Argonaut scheduling test', async t => {
         end: '2019-08-15T10:00:00'
       }
     });
-    t.ok(resp.data.resourceType === 'Bundle');
-    t.ok(resp.data.entry.length !== 0);
+    t.ok(respAF1.data.resourceType === 'Bundle');
+    t.ok(Array.isArray(respAF1.data.entry) && respAF1.data.entry.length !== 0);
 
-    const sts = [...new Set(resp.data.entry.map(e => e.resource.status))];
+    const respMap1 = Array.isArray(respAF1.data.entry) ? respAF1.data.entry.map(e => e.resource.status) : [];
+    const sts = [...new Set(respMap1)];
     t.deepEqual(sts, ['booked', 'proposed']);
   } catch (err) {
     console.log(err);

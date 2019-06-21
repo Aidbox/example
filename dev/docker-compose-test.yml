@@ -1,30 +1,30 @@
 version: '3.3'
 services:
-  db:
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
-    image: "aidbox/db:11.1.0-3-g7a1dab6"
-
   aidbox:
-    ports:
-      - "9988:8080"
+    image: "healthsamurai/devbox:0.4.5-SNAPSHOT"
     depends_on:
       - db
     links:
       - db:postgresql
+    ports:
+      - "8080:8080"
     environment:
       AIDBOX_FHIR_VERSION: 4.0.0
       AIDBOX_PORT: 8080
-      AIDBOX_LICENSE_ID: c4ed8c04ea344b4
-      AIDBOX_LICENSE_KEY: 9bb9e34d91b240e2a438d7dc4fed1518
+      AIDBOX_LICENSE_ID: wildcard
+      AIDBOX_LICENSE_KEY: u134zp2n
       AIDBOX_CLIENT_ID: test-app
       AIDBOX_CLIENT_SECRET: test-secret
-      AIDBOX_BASE_URL: http://localhost:9988
+      AIDBOX_BASE_URL: http://aidbox:8080
       PGHOST: postgresql
       PGPORT: 5432
       PGUSER: postgres
       PGPASSWORD: postgres
-      PGDATABASE: aidbox_haven
-    image: "healthsamurai/devbox:0.4.4-SNAPSHOT"
+      PGDATABASE: aidbox_test
+
+  db:
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: aidbox_test
+    image: "aidbox/db:11.1.0-3-g7a1dab6"

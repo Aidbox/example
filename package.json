@@ -1,0 +1,15 @@
+{
+  "name": "@aidbox/example",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test:app": "nyc node test/scheduler_test.js",
+    "test:app:compose": "docker-compose -f dev/docker-compose-test.yml --project-name at up -d",
+    "test:app:down": "docker-compose -f dev/docker-compose-test.yml --project-name at down",
+    "test:app:build": "docker build -t app_test -f dev/Dockerfile-test ./app",
+    "test:app:docker": "docker run --rm --network at_default --hostname app --name app -p 6666:6666 --env-file dev/env-test -v $(pwd)/app:/app app_test npm test",
+    "test:app:codecov": "cd app && codecov"
+  },
+  "author": "Mikhail Poluboyarinov <mikle.sol@gmail.com>"
+}

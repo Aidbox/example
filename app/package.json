@@ -7,9 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "source .env && nodemon index.js",
-    "test": "nyc node test/scheduler_test.js",
-    "test:docker": "docker run --rm --network at_default --hostname app --name app -p 6666:6666 --env-file env-test -v $(pwd):/app app_test npm test",
-    "test:codecov": "codecov"
+    "test": "nyc node test/app_test.js"
   },
   "dependencies": {
     "aidbox": "1.0.2",
