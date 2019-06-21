@@ -23,9 +23,8 @@ script:
 - docker-compose -f dev/docker-compose-test.yml up -d
 - cd app
 - npm ci
-- export HOST_IP="$(ip route|awk '/default/ { print $3 }')"
-- echo $HOST_IP
-- npm test
+- npm run test:docker
+- npm run test:codecov
 deploy:
   provider: heroku
   api_key:

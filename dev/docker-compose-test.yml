@@ -2,7 +2,6 @@ version: '3.3'
 services:
   db:
     environment:
-      PGDATA: /data
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
@@ -11,6 +10,8 @@ services:
   aidbox:
     ports:
       - "9988:8080"
+    depends_on:
+      - db
     links:
       - db:postgresql
     environment:
@@ -26,6 +27,4 @@ services:
       PGUSER: postgres
       PGPASSWORD: postgres
       PGDATABASE: aidbox_haven
-    depends_on:
-      - db
     image: "healthsamurai/devbox:0.4.4-SNAPSHOT"

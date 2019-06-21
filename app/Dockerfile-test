@@ -1,0 +1,10 @@
+FROM node:8.15.0-jessie-slim
+
+WORKDIR /app
+
+COPY *.json /app/
+COPY *.js /app/
+
+RUN npm install
+
+CMD ["node", "index.js"]
