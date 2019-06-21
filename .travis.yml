@@ -10,17 +10,18 @@ cache:
 services:
 - docker
 env:
-- DOCKER_COMPOSE_VERSION=1.23.2
+- DOCKER_COMPOSE_VERSION=1.22.0
 before_install:
 - sudo rm /usr/local/bin/docker-compose
-- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
-  -s`-`uname -m` > docker-compose
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
 - chmod +x docker-compose
 - sudo mv docker-compose /usr/local/bin
-- npm install -g npm
-script:
 - docker-compose --version
+- sudo service postgresql stop
+- npm install -g npm
+- npm install
 - docker-compose -f dev/docker-compose-test.yml up -d
+script:
 - docker build -t app_test -f app/Dockerfile-test ./app
 - cd app
 - npm ci
