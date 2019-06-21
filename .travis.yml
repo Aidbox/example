@@ -21,6 +21,7 @@ before_install:
 script:
 - docker-compose --version
 - docker-compose -f dev/docker-compose-test.yml up -d
+- docker build -t app_test -f app/Dockerfile-test ./app
 - cd app
 - npm ci
 - npm run test:docker
