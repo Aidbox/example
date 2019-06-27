@@ -73,7 +73,7 @@ function makeEntry(data, { patient, visitType }) {
   } else {
     return {
       resource: {
-	      resourceType: 'Appointment',
+        resourceType: 'Appointment',
 	      id: `proposed-${prRole}-${startDate}T${startTime}`,
 	      status: 'proposed',
 	      serviceType: [{ coding: [visitType] }],
