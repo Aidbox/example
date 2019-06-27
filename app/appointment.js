@@ -63,37 +63,37 @@ function makeEntry(data, { patient, visitType }) {
   if (appId != null) {
     return {
       resource: {
-	resourceType: 'Appointment',
-	id: appId,
-	status: 'booked',
-	start: startDateTime.toISOString(),
-	end: endDateTime.toISOString()
+        resourceType: 'Appointment',
+        id: appId,
+        status: 'booked',
+        start: startDateTime.toISOString(),
+        end: endDateTime.toISOString()
       }
     };
   } else {
     return {
       resource: {
-	resourceType: 'Appointment',
-	id: `proposed-${prRole}-${startDate}T${startTime}`,
-	status: 'proposed',
-	serviceType: [{ coding: [visitType] }],
-	appointmentType: {
-	  coding: [{ system: 'http://hl7.org/fhir/v2/0276', code: 'ROUTINE' }]
-	},
-	start: startDateTime.toISOString(),
-	end: endDateTime.toISOString(),
-	participant: [
-	  {
-	    actor: { reference: `PractitionerRole/${prRole}` },
-	    required: 'required',
-	    status: 'needs-action'
-	  },
-	  {
-	    actor: { reference: patient },
-	    required: 'required',
-	    status: 'needs-action'
-	  }
-	]
+        resourceType: 'Appointment',
+        id: `proposed-${prRole}-${startDate}T${startTime}`,
+        status: 'proposed',
+        serviceType: [{ coding: [visitType] }],
+        appointmentType: {
+          coding: [{ system: 'http://hl7.org/fhir/v2/0276', code: 'ROUTINE' }]
+        },
+        start: startDateTime.toISOString(),
+        end: endDateTime.toISOString(),
+        participant: [
+          {
+            actor: { reference: `PractitionerRole/${prRole}` },
+            required: 'required',
+            status: 'needs-action'
+          },
+          {
+            actor: { reference: patient },
+            required: 'required',
+            status: 'needs-action'
+          }
+        ]
       }
     };
   }
@@ -107,9 +107,9 @@ async function findAppointments(ctx, msg) {
   try {
     const {
       request: {
-	params: { start, end, ...restParams },
-	headers: { authorization },
-	...restReq
+        params: { start, end, ...restParams },
+        headers: { authorization },
+        ...restReq
       }
     } = msg;
 
@@ -125,19 +125,16 @@ async function findAppointments(ctx, msg) {
 
     const rr = getAppointmentsStmt(start, end);
     const data = await ctx.query(rr);
-
+    const rdata = data
+	        .filter(d => moment(d.start).isAfter(start))
+	        .map(d => makeEntry(d, { patient, visitType }));
     return {
       resourceType: 'Bundle',
       type: 'searchset',
-      total: data.length,
-      entry: data
-	.filter(
-	  d => moment(d.start).isAfter(start) && moment(d.end).isBefore(end)
-	)
-	.map(d => makeEntry(d, { patient, visitType }))
+      total: rdata.length,
+      entry: rdata
     };
   } catch (error) {
-    console.log('!!!!!! err', error);
     return { error };
   }
 }
