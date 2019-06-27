@@ -63,11 +63,11 @@ function makeEntry(data, { patient, visitType }) {
   if (appId != null) {
     return {
       resource: {
-	      resourceType: 'Appointment',
-	      id: appId,
-	      status: 'booked',
-	      start: startDateTime.toISOString(),
-	      end: endDateTime.toISOString()
+        resourceType: 'Appointment',
+        id: appId,
+        status: 'booked',
+        start: startDateTime.toISOString(),
+        end: endDateTime.toISOString()
       }
     };
   } else {
@@ -107,9 +107,9 @@ async function findAppointments(ctx, msg) {
   try {
     const {
       request: {
-	      params: { start, end, ...restParams },
-	      headers: { authorization },
-	      ...restReq
+        params: { start, end, ...restParams },
+        headers: { authorization },
+        ...restReq
       }
     } = msg;
 
