@@ -74,26 +74,26 @@ function makeEntry(data, { patient, visitType }) {
     return {
       resource: {
         resourceType: 'Appointment',
-	      id: `proposed-${prRole}-${startDate}T${startTime}`,
-	      status: 'proposed',
-	      serviceType: [{ coding: [visitType] }],
-	      appointmentType: {
-	        coding: [{ system: 'http://hl7.org/fhir/v2/0276', code: 'ROUTINE' }]
-	      },
-	      start: startDateTime.toISOString(),
-	      end: endDateTime.toISOString(),
-	      participant: [
-	        {
-	          actor: { reference: `PractitionerRole/${prRole}` },
-	          required: 'required',
-	          status: 'needs-action'
-	        },
-	        {
-	          actor: { reference: patient },
-	          required: 'required',
-	          status: 'needs-action'
-	        }
-	      ]
+        id: `proposed-${prRole}-${startDate}T${startTime}`,
+        status: 'proposed',
+        serviceType: [{ coding: [visitType] }],
+        appointmentType: {
+          coding: [{ system: 'http://hl7.org/fhir/v2/0276', code: 'ROUTINE' }]
+        },
+        start: startDateTime.toISOString(),
+        end: endDateTime.toISOString(),
+        participant: [
+          {
+            actor: { reference: `PractitionerRole/${prRole}` },
+            required: 'required',
+            status: 'needs-action'
+          },
+          {
+            actor: { reference: patient },
+            required: 'required',
+            status: 'needs-action'
+          }
+        ]
       }
     };
   }
