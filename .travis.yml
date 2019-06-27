@@ -22,7 +22,7 @@ before_install:
 - docker-compose --version
 - sudo service postgresql stop
 - npm install -g npm
-- npm install
+- cd app && npm install && cd ..
 - npm run test:app:compose
 script:
 - npm run test:app:build
