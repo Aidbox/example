@@ -1,10 +1,8 @@
-FROM node:8.15.0-jessie-slim
+FROM node:8
 
 WORKDIR /app
 
 COPY *.json /app/
 COPY *.js /app/
-
-RUN npm install
 
 CMD ["node", "index.js"]
