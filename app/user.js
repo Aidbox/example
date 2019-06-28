@@ -52,14 +52,11 @@ async function userSub(ctx, msg) {
           resource.data = {};
         }
         resource.data.patient = patient;
-        const res = await ctx.request({
+        await ctx.request({
           url: `/fhir/User/${resource.id}`,
           method: 'put',
           body: resource
         });
-      }
-      else {
-        console.log('Can never get here!');
       }
     } catch (err) {
       console.error(err);
