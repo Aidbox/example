@@ -58,6 +58,9 @@ async function userSub(ctx, msg) {
           body: resource
         });
       }
+      else {
+        console.log('Can never get here!');
+      }
     } catch (err) {
       console.error(err);
     }
