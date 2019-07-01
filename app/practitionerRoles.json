@@ -1,0 +1,212 @@
+[
+  {
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "availableTime": [{
+        "daysOfWeek": ["mon", "tue", "wed", "thu", "fri", "sat"],
+        "availableStartTime": "10:00:00",
+        "availableEndTime": "15:00:00"
+      }],
+      "specialty": [{
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "394579002",
+          "display": "Cardiology"
+        }]
+      }]
+    },
+    "request": {
+      "method": "POST",
+      "url": "/PractitionerRole"
+    }
+  },
+  {
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "availableTime": [{
+        "daysOfWeek": ["mon", "tue", "wed", "thu", "fri"],
+        "availableStartTime": "09:00:00",
+        "availableEndTime": "14:00:00"
+      }],
+      "specialty": [{
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "394577000",
+          "display": "Anesthetics"
+        }]
+      }]
+    },
+    "request": {
+      "method": "POST",
+      "url": "/PractitionerRole"
+    }
+  },
+  {
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "availableTime": [{
+        "daysOfWeek": ["mon", "wed", "thu", "fri"],
+        "availableStartTime": "08:00:00",
+        "availableEndTime": "15:00:00"
+      }],
+      "specialty": [{
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "Dermatology",
+          "display": "394582007"
+        }]
+      }]
+    },
+    "request": {
+      "method": "POST",
+      "url": "/PractitionerRole"
+    }
+  },
+  {
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "availableTime": [{
+        "daysOfWeek": ["mon", "wed", "fri"],
+        "availableStartTime": "10:00:00",
+        "availableEndTime": "14:00:00"
+      }],
+      "specialty": [{
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "394579002",
+          "display": "Endocrinology"
+        }]
+      }]
+    },
+    "request": {
+      "method": "POST",
+      "url": "/PractitionerRole"
+    }
+  },
+  {
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "availableTime": [{
+        "daysOfWeek": ["mon", "tue", "wed", "thu", "fri"],
+        "availableStartTime": "13:00:00",
+        "availableEndTime": "19:00:00"
+      }],
+      "specialty": [{
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "394814009",
+          "display": "General practice"
+        }]
+      }]
+    },
+    "request": {
+      "method": "POST",
+      "url": "/PractitionerRole"
+    }
+  },
+  {
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "availableTime": [{
+        "daysOfWeek": ["tue", "wed", "thu", "fri"],
+        "availableStartTime": "08:00:00",
+        "availableEndTime": "13:00:00"
+      }],
+      "specialty": [{
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "394586005",
+          "display": "Gynecology"
+        }]
+      }]
+    },
+    "request": {
+      "method": "POST",
+      "url": "/PractitionerRole"
+    }
+  },
+  {
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "availableTime": [{
+        "daysOfWeek": ["mon", "tue", "wed", "thu", "fri", "sat"],
+        "availableStartTime": "10:00:00",
+        "availableEndTime": "16:00:00"
+      }],
+      "specialty": [{
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "394807007",
+          "display": "Infectious diseases"
+        }]
+      }]
+    },
+    "request": {
+      "method": "POST",
+      "url": "/PractitionerRole"
+    }
+  },
+  {
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "availableTime": [{
+        "daysOfWeek": ["tue", "wed", "thu", "fri" ],
+        "availableStartTime": "14:00:00",
+        "availableEndTime": "18:00:00"
+      }],
+      "specialty": [{
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "394594003",
+          "display": "Ophthalmology"
+        }]
+      }]
+    },
+    "request": {
+      "method": "POST",
+      "url": "/PractitionerRole"
+    }
+  },
+  {
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "availableTime": [{
+        "daysOfWeek": ["mon", "tue", "wed", "thu", "fri"],
+        "availableStartTime": "07:00:00",
+        "availableEndTime": "13:00:00"
+      }],
+      "specialty": [{
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "394607009",
+          "display": "Pediatric dentistry"
+        }]
+      }]
+    },
+    "request": {
+      "method": "POST",
+      "url": "/PractitionerRole"
+    }
+  },
+  {
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "availableTime": [{
+        "daysOfWeek": ["thu", "fri", "sat"],
+        "availableStartTime": "16:00:00",
+        "availableEndTime": "20:30:00"
+      }],
+      "specialty": [{
+        "coding": [{
+          "system": "http://snomed.info/sct",
+          "code": "394913002",
+          "display": "Psychotherapy"
+        }]
+      }]
+    },
+    "request": {
+      "method": "POST",
+      "url": "/PractitionerRole"
+    }
+  }
+]
