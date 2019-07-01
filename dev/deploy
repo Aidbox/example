@@ -1,14 +1,13 @@
 #!/bin/bash
 echo $(pwd)
-cd dev
 echo "Replace IMAGE_TAG in deployment to ${1}"
-cat deployment.yml | sed 's;IMAGE_TAG;'"${1}"';g' > /tmp/d.yml
+cat dev/deployment.yml | sed 's;IMAGE_TAG;'"${1}"';g' > /tmp/d.yml
 echo "Install kubectl"
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 echo "Move kubectl config"
 mkdir ${HOME}/.kube
-mv config ${HOME}/.kube/config
+mv dev/config ${HOME}/.kube/config
 echo "Deploy to kubernetes"
 kubectl apply -f /tmp/d.yml
