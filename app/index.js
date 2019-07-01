@@ -49,7 +49,7 @@ async function prepareClientPolicy(context) {
       method: 'post',
       body: {
         resourceType: 'Bundle',
-        type: 'transaction',
+        type: 'Transaction',
         entry: [
           {
             resource: {
