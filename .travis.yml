@@ -10,6 +10,8 @@ services:
 env:
 - DOCKER_COMPOSE_VERSION=1.22.0
 before_install:
+- openssl aes-256-cbc -K $encrypted_5e7785341ceb_key -iv $encrypted_5e7785341ceb_iv -in dev/deployment.yml.enc -out dev/deployment.yml -d
+- openssl aes-256-cbc -K $encrypted_5e7785341ceb_key -iv $encrypted_5e7785341ceb_iv -in config.enc -out config -d
 - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 - sudo apt-get update
@@ -27,9 +29,8 @@ before_install:
 script:
 - npm run test:app:build
 - npm run test:app:docker
-before_deploy:
-- openssl aes-256-cbc -K $encrypted_5e7785341ceb_key -iv $encrypted_5e7785341ceb_iv -in dev/deployment.yml.enc -out dev/deployment.yml -d
-- openssl aes-256-cbc -K $encrypted_5e7785341ceb_key -iv $encrypted_5e7785341ceb_iv -in config.enc -out config -d
+after_script:
+  - bash ./telegram_notification.sh
 deploy:
 - provider: script
   script: bash dev/docker_push ${TRAVIS_COMMIT:0:6}
