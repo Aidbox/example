@@ -58,3 +58,4 @@ buck-out/
 *.jsbundle
 dev/deployment.yml
 dev/config
+dev/secrets.tar
