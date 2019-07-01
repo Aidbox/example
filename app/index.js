@@ -40,14 +40,9 @@ var ctx = {
   }
 };
 
-async function start() {
-  console.log('try to register aidbox app', process.env.APP_INIT_URL);
-  try {
-    //console.log(ctx.manifest);
-    const c = await aidbox.start(ctx);
-    console.log('aidbox app was registred');
-    console.log('prepare access policy && oAuth mobile client');
-    await c.request({
+async function prepareClientPolicy(context) {
+  console.log('prepare access policy && oAuth mobile client');
+  await context.request({
       url: '/',
       method: 'post',
       body: {
@@ -123,6 +118,14 @@ async function start() {
         ]
       }
     });
+}
+
+async function start() {
+  console.log('try to register aidbox app', process.env.APP_INIT_URL);
+  try {
+    const c = await aidbox.start(ctx);
+    console.log('aidbox app was registred');
+    await prepareClientPolicy();
   } catch (err) {
     aidbox.stop();
     console.log('Error:', err.body);
