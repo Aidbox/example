@@ -125,7 +125,7 @@ async function start() {
   try {
     const c = await aidbox.start(ctx);
     console.log('aidbox app was registred');
-    await prepareClientPolicy();
+    await prepareClientPolicy(c);
   } catch (err) {
     aidbox.stop();
     console.log('Error:', err.body);
