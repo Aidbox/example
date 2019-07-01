@@ -74,19 +74,55 @@ async function start() {
           },
           {
             resource: {
-              resourceType: 'AccessPolicy',
-              engine: 'allow',
-              id: 'allow-all'
+              "link": [{
+                "id": "mobile",
+                "resourceType": "Client"
+              }],
+              "engine": "allow",
+              "id": "allow-mobile",
+              "resourceType": "AccessPolicy"
             },
             request: {
               method: 'PUT',
-              url: '/AccessPolicy/allow-all'
+              url: '/AccessPolicy/allow-mobile'
+            }
+          },
+          {
+            resource: {
+              auth: {
+                authorization_code: {
+                  redirect_uri: `${process.env.APP_URL}/auth`
+                }
+              },
+              secret: process.env.APP_SECRET,
+              first_party: true,
+              grant_types: ['authorization_code'],
+              id: 'ui',
+              resourceType: 'Client'
+            },
+            request: {
+              method: 'PUT',
+              url: '/Client/ui'
+            }
+          },
+          {
+            resource: {
+              "link": [{
+                "id": "ui",
+                "resourceType": "Client"
+              }],
+              "engine": "allow",
+              "id": "allow-ui",
+              "resourceType": "AccessPolicy"
+            },
+            request: {
+              method: 'PUT',
+              url: '/AccessPolicy/allow-mobile'
             }
           }
         ]
       }
     });
-
   } catch (err) {
     aidbox.stop();
     console.log('Error:', err.body);
