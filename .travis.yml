@@ -29,9 +29,6 @@ script:
 - npm run test:app:docker
 after_script:
 - bash ./telegram_notification.sh
-before_deploy:
-- openssl aes-256-cbc -K $encrypted_5e7785341ceb_key -iv $encrypted_5e7785341ceb_iv -in dev/secrets.tar.enc -out dev/secrets.tar -d
-- tar xvf dev/secrets.tar --directory dev
 deploy:
 - provider: script
   script: bash dev/docker_push ${TRAVIS_COMMIT:0:6}
