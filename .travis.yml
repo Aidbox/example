@@ -27,11 +27,19 @@ before_install:
 script:
 - npm run test:app:build
 - npm run test:app:docker
-- npm run test:app:codecov
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_5e7785341ceb_key -iv $encrypted_5e7785341ceb_iv -in dev/deployment.yml.enc -out dev/deployment.yml -d
+- openssl aes-256-cbc -K $encrypted_5e7785341ceb_key -iv $encrypted_5e7785341ceb_iv -in config.enc -out config -d
 deploy:
-  provider: heroku
-  api_key:
-    secure: jt5l5rzpBiLFmE8whpAAGfmuONfV54oBnx+2jHpTjbaWoRNBH9jGxEqnagTMCwnIZvhmDfynMpUL6t1ZKqSU+Hr+onnMIBEo7SZwU7WBICzVsHUTxaAEwggHVQKfOm42gq9ryaYBPVeF1FZhAZTWgY7TJ6fU3HqnfQcmK3NlcS3/NeoYaDsm+WXrvNybjOCClk7TzufIUQFFlyv76UbojhZlK/AuDVAleyAdmI2fCDWD/2AA25jcbG9ObVHYDiCJ7xsvIWQCbKkqVSo7LAQq87hSfU/9dBuKDzcLsxTJML8e3+fqtUaH+DkyvnEQNZ9nrH87TdMo0rkM5l93BE3BJntU+1CfB8Xpp9VCbXgAOPW38dPivVbdJs/LCtv59KH5azV5pa6Njs/yHDZEwGeCjOkIYfiAoNYkqPas6kOp/AFL7rfQ6GV5TrboEzJl3MFucg8/xeyDx1+yh20Zcy27w/efHNCO0t5NfVnQ9bnqGwIor3Y+P/f3O/wncPCwj9fD6attq4z6wlr9BCnt+FSIj0xiru4I1WRyPsiCwarWov48cMUaWirhlQwCf1ofI74RCE+roXBjeAh1HdWwUARP/F4v4Iv/+MDWD/skMkfNcTwoj44hNgDLOyE8276IDWAaZm3RpX8Ag4hF+bFqmMzN3vziL5oDa+SCw/9/zCNuQm4=
-  app: aidbox-app
+- provider: script
+  script: bash dev/docker_push ${TRAVIS_COMMIT:0:6}
   on:
-    repo: Aidbox/example
+    branch: master
+- provider: script
+  script: bash dev/deploy ${TRAVIS_COMMIT:0:6}
+  on:
+    branch: master
+- provider: script
+  script: bash docker_push $TRAVIS_TAG
+  on:
+    tags: true

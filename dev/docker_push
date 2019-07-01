@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+docker build -t aidbox/example:${1} -f ./app/Dockerfile ./app
+docker push aidbox/example:${1}
