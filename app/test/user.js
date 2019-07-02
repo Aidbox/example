@@ -84,7 +84,7 @@ describe("user.js", () => {
   afterEach(() => {
     spy.resetHistory();
   });
-  describe("userSub()", () => {
+  describe("#userSub()", () => {
     it('error of no subscription data', () => {
       expect(userSub({}, {}))
         .to.eventually.be.rejectedWith(Error, "Cannot destructure property `action` of 'undefined' or 'null'");

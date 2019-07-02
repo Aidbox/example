@@ -3,9 +3,11 @@ const aidbox = require('aidbox');
 const { findAppointments, holdAppointment } = require('./appointment');
 const { userSub } = require('./user');
 
-var APP_ID = 'example-app';
+const prRoles = require('./practitionerRoles.json');
 
-var ctx = {
+const APP_ID = 'example-app';
+
+const ctx = {
   debug: process.env.APP_DEBUG || false,
   env: {
     init_url: process.env.APP_INIT_URL,
@@ -47,7 +49,7 @@ async function prepareClientPolicy(context) {
       method: 'post',
       body: {
         resourceType: 'Bundle',
-        type: 'transaction',
+        type: 'Transaction',
         entry: [
           {
             resource: {
@@ -120,12 +122,32 @@ async function prepareClientPolicy(context) {
     });
 }
 
+async function initPractitionerRoles(c) {
+  console.log("Initializing practitioner roles");
+  const res = await c.request({
+    url: '/PractitionerRole',
+    method: 'get'
+  });
+  if (res.total === 0) {
+    await c.request({
+      url: '/',
+      method: 'post',
+      body: {
+        resourceType: 'Bundle',
+        type: 'Transaction',
+        entry: prRoles
+      }
+    });
+  }
+}
+
 async function start() {
   console.log('try to register aidbox app', process.env.APP_INIT_URL);
   try {
     const c = await aidbox.start(ctx);
     console.log('aidbox app was registred');
     await prepareClientPolicy(c);
+    await initPractitionerRoles(c);
   } catch (err) {
     aidbox.stop();
     console.log('Error:', err.body);
