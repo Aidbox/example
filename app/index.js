@@ -148,6 +148,7 @@ async function start() {
     console.log('aidbox app was registred');
     await prepareClientPolicy(c);
     await initPractitionerRoles(c);
+    console.log('App was started');
   } catch (err) {
     aidbox.stop();
     console.log('Error:', err.body);
