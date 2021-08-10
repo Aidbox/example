@@ -114,7 +114,7 @@ async function prepareClientPolicy(context) {
             },
             request: {
               method: 'PUT',
-              url: '/AccessPolicy/allow-mobile'
+              url: '/AccessPolicy/allow-ui'
             }
           }
         ]
